@@ -3,11 +3,7 @@
 {{- $use_internal_repository := or .use_internal_repository "no" -}}
 
 architecture: {{ $architecture }}
-actions:
-  - action: run
-    description: Kali key
-    command: sh -c "wget https: //archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-keyring.asc"
-    
+actions:    
   - action: debootstrap
     suite: {{ $suite }}
     components:
