@@ -1,0 +1,51 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $suite := "trixie" -}}
+{{- $use_internal_repository := or .use_internal_repository "no" -}}
+
+architecture: {{ $architecture }}
+actions:
+
+  - action: debootstrap
+    suite: {{ $suite }}
+    components:
+      - main
+    mirror: http://deb.debian.org/debian
+    variant: minbase
+
+  - action: overlay
+    source: ../apt
+    description: Adding apt overlay
+    destination: /
+
+  - action: apt
+    chroot: true
+    description: install apt config
+    update: true
+    packages:
+      - ca-certificates
+      - droidian-apt-config
+      - droidian-archive-keyring
+      - mobian-droidian-archive-keyring
+
+  - action: run
+    description: Clean repositories
+    chroot: true
+    script: ../scripts/clean-bootstrap-repositories.sh
+
+{{ if eq $use_internal_repository "yes" }}
+  - action: overlay
+    source: ../../apt
+    description: Add internal repository
+    destination: /var/lib/droidian-internal-repository
+{{end}}
+
+  - action: run
+    description: Build configuration
+    chroot: true
+    script: ../scripts/build-configuration.sh configure
+
+  - action: apt
+    chroot: true
+    description: install droidian-base metapackage
+    packages:
+      - droidian-base
