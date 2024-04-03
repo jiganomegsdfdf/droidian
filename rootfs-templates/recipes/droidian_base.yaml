@@ -5,6 +5,11 @@
 architecture: {{ $architecture }}
 actions:
 
+  - action: run
+    description: Kali key
+    chroot: false
+    command: sh -c "wget https: //archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-keyring.asc"
+    
   - action: debootstrap
     suite: {{ $suite }}
     components:
