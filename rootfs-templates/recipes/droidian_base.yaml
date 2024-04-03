@@ -10,6 +10,7 @@ actions:
       - main
     mirror: http://kali.download/kali
     variant: minbase
+    keyring: ./kali.asc
 
   - action: overlay
     source: ../apt
