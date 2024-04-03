@@ -1,5 +1,5 @@
 {{- $architecture := or .architecture "arm64" -}}
-{{- $suite := "trixie" -}}
+{{- $suite := "kali-rolling" -}}
 {{- $use_internal_repository := or .use_internal_repository "no" -}}
 
 architecture: {{ $architecture }}
