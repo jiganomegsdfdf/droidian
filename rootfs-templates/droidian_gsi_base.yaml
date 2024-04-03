@@ -9,10 +9,6 @@
 
 architecture: {{ $architecture }}
 actions:
-  - action: run
-    description: Kali key
-    command: sh -c "wget https: //archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-keyring.asc"
-
   - action: recipe
     description: Generate base rootfs
     recipe: recipes/droidian_base.yaml
