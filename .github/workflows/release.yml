@@ -35,9 +35,6 @@ jobs:
       - name: Get current date
         run: echo "current_date=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
-      - name: Get current date
-        run: echo "current_date=$(date +'%Y%m%d')" >> $GITHUB_ENV
-
       - name: Set suffix
         run: echo "release_suffix=_${{ env.current_date }}" >> $GITHUB_ENV
 
