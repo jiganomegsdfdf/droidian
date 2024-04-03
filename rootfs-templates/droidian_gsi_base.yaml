@@ -1,6 +1,6 @@
 {{- $architecture := or .architecture "arm64" -}}
 {{- $apilevel := or .apilevel "28" -}}
-{{- $suite := "trixie" -}}
+{{- $suite := "kali-rolling" -}}
 {{- $use_internal_repository := or .use_internal_repository "no" -}}
 
 {{- $username := or .username "droidian" -}}
@@ -9,6 +9,9 @@
 
 architecture: {{ $architecture }}
 actions:
+  - action: run
+    description: Kali key
+    command: sh -c "wget https: //archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-keyring.asc"
 
   - action: recipe
     description: Generate base rootfs
